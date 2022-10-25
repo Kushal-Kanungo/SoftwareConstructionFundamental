@@ -205,6 +205,20 @@ public class SparseMatrix  {
             return new SparseMatrix(newMatrix);
     }
 
+    public int[][] getInMatrixForm(){
+    	int[][] result = new int[matrixRows][matrixCols];
+    	 int idx = 0;
+         for (int row = 0; row < matrixRows; row++) {
+             for (int col = 0; col < matrixCols; col++) {
+                 if (idx < totalElements && matrixSparse[idx].getRow() == row && matrixSparse[idx].getCol() == col)
+                      result[row][col] = matrixSparse[idx++].getValue();
+                 else
+                     result[row][col] = 0;
+             }
+         }
+         return result;
+    }
+    
     @Override
     public String toString() {
             String result = "";
