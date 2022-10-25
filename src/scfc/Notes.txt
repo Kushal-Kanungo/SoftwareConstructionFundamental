@@ -1,0 +1,16 @@
+1. Item class is in Item.java
+2. ShoppingCart class is in ShoppingCart.java
+3. Driver Code is in Shopping.java
+
+
+New things I learned
+1. Overriding hashCode() and equals() function so we can use an Object as key in hashmaps.
+2. Java don't have Destructor instead it has Garbage Collector.
+3. For each function are also present in java.
+4. Lambda function are also presnt in java just like Arrow functions in JavaScript.
+
+
+Notes:
+1. Always keep class attributes/properties private and use setters and getters for access.
+2. Use most optimized approach like if we use an ArrayList here time complexity will be O(n).
+3. Use Comments 
