@@ -8,7 +8,7 @@ package com.polynomial;
  * @since 21 Oct 2022 10:00 AM
  *
  */
-public class PolyElement {
+public final class PolyElement {
 
 	private final int coefficient;
 	private final int power;

@@ -29,6 +29,9 @@ public class SparseMatrix  {
      */
     public SparseMatrix(int[][] userMatrix) {
         this.totalElements = calcNonZeros(userMatrix);
+        if (this.totalElements == 0)
+        	throw new InvalidParameterException("Matrix Cannot Be Empty");
+        
         this.matrixRows = userMatrix.length;
         this.matrixCols = userMatrix[0].length;
         MatrixBlock[] tempSparseMatrix = new MatrixBlock[totalElements];
@@ -39,6 +42,8 @@ public class SparseMatrix  {
                     tempSparseMatrix[idx++] = new MatrixBlock(row, col, userMatrix[row][col]);
             }
         }
+        
+        
         this.matrixSparse = tempSparseMatrix;
     }
 
@@ -151,6 +156,9 @@ public class SparseMatrix  {
      * @return SparseMatrix
      */
     public SparseMatrix addMatrix(SparseMatrix secondMatrix){
+    	if (this.matrixRows != secondMatrix.matrixRows || this.matrixCols != secondMatrix.matrixCols)
+    		throw new InvalidParameterException("Two matrices with different dimension cannot be added");
+    	
         int firstIdx = 0;
         int secondIdx = 0;
         List<MatrixBlock> newList = new ArrayList<MatrixBlock>();
@@ -158,7 +166,7 @@ public class SparseMatrix  {
         while (firstIdx<this.totalElements && secondIdx<secondMatrix.totalElements){
             MatrixBlock firstBlock = this.matrixSparse[firstIdx];
             MatrixBlock secondBlock = secondMatrix.matrixSparse[secondIdx];
-            if (firstBlock.equals(secondBlock)) {
+            if (firstBlock.hasSamePostion(secondBlock)) {
                 newList.add(firstBlock.addBlock(secondBlock));
                 firstIdx++;
                 secondIdx++;

@@ -12,20 +12,25 @@ class TestAddMatrix {
 
 	public static Stream<Arguments> object() {
 		return Stream.of(
-				Arguments.of(new int[][] {{0,1},{0, 0}}, new int[][] {{0,0},{7, 0}}, new int[][] {{0,1},{7, 0}}),
-				Arguments.of(new int[][] {{9,0},{0, 0}}, new int[][] {{0,0},{0, 0}}, new int[][] {{9,0},{0, 0}}),
-				Arguments.of(new int[][] {{1,0,0},{0,2, 0}, {0,0,3}}, new int[][] {{0,0,1},{0, 2,0}, {3,0,0}}, new int[][] {{1,0,1},{0, 4,0}, {3,0,3}})
-				);
+				Arguments.of(new int[][] { { 0, 1 }, { 0, 0 } }, new int[][] { { 0, 0 }, { 7, 0 } },
+						new int[][] { { 0, 1 }, { 7, 0 } }),
+				Arguments.of(new int[][] { { 9, 0 }, { 0, 1 } }, new int[][] { { 1, 0 }, { 0, 1 } },
+						new int[][] { { 10, 0 }, { 0, 2} }),
+				Arguments.of(new int[][] { { 1, 0, 0 }, { 0, 2, 0 }, { 0, 0, 3 } },
+						new int[][] { { 0, 0, 1 }, { 0, 2, 0 }, { 3, 0, 0 } },
+						new int[][] { { 1, 0, 1 }, { 0, 4, 0 }, { 3, 0, 3 } }),
+				Arguments.of(new int[][] {{0,2}, {0,0}, {3,0}}, new int[][]{{-3,0}, {4,0}, {0,-1}}, new int[][] {{-3,2},{4,0},{3,-1}})
+
+		);
 	}
 
 	@ParameterizedTest
 	@MethodSource
-	public void object(int[][] firstArray ,int[][] secondArray, int[][] target) {
+	public void object(int[][] firstArray, int[][] secondArray, int[][] target) {
 		SparseMatrix first = new SparseMatrix(firstArray);
 		SparseMatrix second = new SparseMatrix(secondArray);
 		SparseMatrix addedMatrix = first.addMatrix(second);
-		
 		assertArrayEquals(target, addedMatrix.getInMatrixForm());
-	
-}
+
+	}
 }

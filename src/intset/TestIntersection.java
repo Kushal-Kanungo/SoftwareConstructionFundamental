@@ -1,7 +1,8 @@
-package com.assignment_5;
+package intset;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
@@ -14,9 +15,10 @@ class TestIntersection {
 
 	public static Stream<Arguments> object() {
 		return Stream.of(
-				Arguments.of(new int[] {1,2,3}, new int[] {4,5,6}, new int[] {}),
+				Arguments.of(new int[] {1,2,3}, new int[] {4,5,6,1}, new int[] {1}),
 				Arguments.of(new int[] {1,2,3}, new int[] {1,2,3}, new int[] {1,2,3}),
-				Arguments.of(new int[] {4,6,8}, new int[] {5,7,9}, new int[] {}),
+				Arguments.of(new int[] {4,6,8}, new int[] {5,7,9,8}, new int[] {8}),
+				Arguments.of(new int[] {1,1,1,1,5,5,5}, new int[] {5,1,5,5,6,67,4,7,8}, new int[] {1,5}),
 				Arguments.of(new int[] {1,1,1,1,5,5}, new int[] {1,1,1,5,6}, new int[] {1,5})
 				);
 	}
@@ -37,6 +39,17 @@ class TestIntersection {
 		InSetClass secondSet = new InSetClass(secondValues);
 		
 		assertArrayEquals(expected, firstSet.intersectionWith(secondSet).getValues());
+		
+	}
+	
+	public void testEmpty() {
+		
+		assertThrows(InvalidParameterException.class, ()->{
+			List<Integer> firstValues = new ArrayList<Integer>();
+			List<Integer> secondValues = new ArrayList<Integer>();
+			InSetClass firstSet = new InSetClass(firstValues);
+			InSetClass secondSet = new InSetClass(secondValues);
+		});
 		
 	}
 

@@ -1,6 +1,8 @@
 package com.sparse;
 
 /**
+ * class : "MatrixBlock"
+ * This class stores row, col, val of a sparse matrix and their actions 
  * 
  * @author Kushal
  * @since 22 Oct 2022 3:00 PM
@@ -11,6 +13,7 @@ public class MatrixBlock implements Comparable<MatrixBlock> {
     private final int value;
 
     /**
+     * Constructor to initialize the object of this class 
      * 
      * @param row
      * @param col
@@ -22,19 +25,32 @@ public class MatrixBlock implements Comparable<MatrixBlock> {
         this.value = value;
     }
 
+    /**
+     * Getter for row
+     * @return
+     */
     public int getRow() {
         return this.row;
     }
 
+    /**
+     * Getter for column
+     * @return
+     */
     public int getCol() {
         return this.col;
     }
 
+    /**
+     * Getter for value
+     * @return
+     */
     public int getValue() {
         return this.value;
     }
 
     /**
+     * To transpose we are swapping the rows and columns
      * 
      * @return
      */
@@ -43,6 +59,7 @@ public class MatrixBlock implements Comparable<MatrixBlock> {
     }
 
     /**
+     * To add two block we check row and column and when they are same we add it and return new object
      * 
      * @param secondBlock
      * @return
@@ -54,6 +71,7 @@ public class MatrixBlock implements Comparable<MatrixBlock> {
     }
 
     /**
+     * To multiply the block we check if row and col are same and then multiply the value
      * 
      * @param secBlock
      * @return
@@ -63,8 +81,15 @@ public class MatrixBlock implements Comparable<MatrixBlock> {
             return new MatrixBlock(this.row, this.col, this.value*secBlock.value);
         return null;
     }
+    
+    public boolean hasSamePostion(MatrixBlock secBlock) {
+    	if (this.row == secBlock.row && this.col == secBlock.col)
+    		return true;
+    	return false;
+    }
 
     /**
+     * It checks which block comes before so that we can use two pointer for linear time.
      * 
      * @param secondBlock
      * @return
@@ -77,6 +102,13 @@ public class MatrixBlock implements Comparable<MatrixBlock> {
         return this.col < secondBlock.col;
     }
 
+    
+    /**
+     * We are overriding this function so that we can use sorting in these blocks 
+     * 
+     * @param block
+     * 
+     */
     @Override
     public int compareTo(MatrixBlock block) {
         if (this.row != block.row)
@@ -85,6 +117,11 @@ public class MatrixBlock implements Comparable<MatrixBlock> {
     }
     
     
+    /**
+     * This function will check equality between two object of MatrixBlock class.
+     * @param o
+     * 
+     */
     @Override
     public boolean equals(Object o) {
         if (o == this)

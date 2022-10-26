@@ -1,4 +1,4 @@
-package com.assignment_5;
+package intset;
 
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
@@ -12,10 +12,10 @@ import java.util.List;
  * @author Kushal
  * @since 20 OCT 2022 3:30 PM
  */
-public class InSetClass {
+public final class InSetClass {
 	private final int SET_SIZE = 1001;
-	private int[] set;
-	private int size;
+	private final int[] set;
+	private final int size;
 
 	/**
 	 * Constructor for InSetClass it takes an array of positive integers and
@@ -24,18 +24,25 @@ public class InSetClass {
 	 * @param setValues
 	 */
 	public InSetClass(List<Integer> setValues) throws InvalidParameterException {
-		set = new int[SET_SIZE];
-		Arrays.fill(set, 0);
+		int [] tempSet = new int[SET_SIZE];
+		int tempSize = 0;
+		Arrays.fill(tempSet, 0);
 		for (int number : setValues) {
 			if (number <= 0 || number > 1000)
 				throw new InvalidParameterException("Values should be between 1 - 1000");
 
-			if (set[number] == 0) {
-				this.set[number] = 1;
-				this.size++;
+			if (tempSet[number] == 0) {
+				tempSet[number] = 1;
+				tempSize++;
 			}
-
 		}
+		this.size = tempSize;
+		
+		if(tempSize==0)
+			throw new InvalidParameterException("Set Cannot Be Empty");
+		
+		this.set = tempSet;
+		
 
 	}
 
