@@ -66,21 +66,13 @@ public class MatrixBlock implements Comparable<MatrixBlock> {
      */
     public MatrixBlock addBlock(MatrixBlock secondBlock) {
         if (this.row == secondBlock.getRow() && this.col == secondBlock.getCol())
+        {        	if(this.value+secondBlock.value == 0)
+        		return null;
             return new MatrixBlock(this.row, this.col, this.value + secondBlock.getValue());
+        }   
         return null;
     }
 
-    /**
-     * To multiply the block we check if row and col are same and then multiply the value
-     * 
-     * @param secBlock
-     * @return
-     */
-    public MatrixBlock multiplyBlock(MatrixBlock secBlock){
-        if(this.row==secBlock.col)
-            return new MatrixBlock(this.row, this.col, this.value*secBlock.value);
-        return null;
-    }
     
     public boolean hasSamePostion(MatrixBlock secBlock) {
     	if (this.row == secBlock.row && this.col == secBlock.col)
