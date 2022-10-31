@@ -3,7 +3,6 @@ package com.graphic.shape;
 import java.util.ArrayList;
 
 import com.graphic.point.Point;
-import com.graphic.screen.Screen;
 
 /**
  * class : Rectangle desc : This class represent a rectangle which have its
@@ -13,11 +12,10 @@ import com.graphic.screen.Screen;
  * @since 28 OCT 2022 12:00 AM
  *
  */
-public class Rectangle implements Shape {
-	private final double TWO = 2;
+public class Polygon implements Shape {
+	private double sides;
 	private double length;
-	private double width;
-	private double[] origin;
+	double origin[] = new double[2];
 	double end[] = new double[2];
 
 	/**
@@ -26,17 +24,18 @@ public class Rectangle implements Shape {
 	 * @param radius
 	 * @param pointer
 	 */
-	public Rectangle(ArrayList<Double> shapeArguments, Point pointer) {
+	public Polygon(ArrayList<Double> shapeArguments, Point pointer) {
 		if (shapeArguments.size() != 2)
 			throw new IllegalArgumentException("Enter Valid Number of Arguments");
 		for (Double element : shapeArguments) {
 			if (element <= 0)
 				throw new IllegalArgumentException("Arguments cannot be empty");
 		}
-		this.length = shapeArguments.get(0);
-		this.width = shapeArguments.get(1);
+		this.sides = shapeArguments.get(0);
+		this.length = shapeArguments.get(1);
+		
 		this.origin = pointer.getPoint();
-		end[0] = origin[0] + width;
+		end[0] = origin[0] + length;
 		end[1] = origin[1] + length;
 	}
 
@@ -46,7 +45,7 @@ public class Rectangle implements Shape {
 	 * @return String
 	 */
 	public String getShapeName() {
-		return "Rectangle";
+		return "Polygon";
 	}
 
 	/**
@@ -56,7 +55,8 @@ public class Rectangle implements Shape {
 	 */
 	@Override
 	public double getArea() {
-		return Utility.round(length * width);
+		double area =  (double) ((sides * (length * length)) / (4.0 * Math.tan((Math.PI / sides))));
+		return Utility.round(area);
 	}
 
 	/**
@@ -66,7 +66,8 @@ public class Rectangle implements Shape {
 	 */
 	@Override
 	public double getPerimeter() {
-		return Utility.round(TWO*(length+ width));
+		
+		return Utility.round(sides*length);
 	}
 
 	/**
@@ -85,9 +86,8 @@ public class Rectangle implements Shape {
 	 */
 	@Override
 	public boolean isPointEnclosed(double[] point) {
-		if (point[0] > end[0] || point[0] < origin[0] || point[1] > end[1] || point[1] < origin[1])
-			return false;
-		return true;
+		
+		return false;
 	}
 
 	/**
@@ -106,6 +106,6 @@ public class Rectangle implements Shape {
 	@Override
 	public String getShapeInfo() {
 
-		return "RECTANGLE x:" + origin[0] + " y:" + origin[1];
+		return "Polygon x:" + origin[0] + " y:" + origin[1];
 	}
 }

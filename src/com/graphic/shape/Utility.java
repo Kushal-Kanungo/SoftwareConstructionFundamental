@@ -1,8 +1,15 @@
 package com.graphic.shape;
 
+import java.text.DecimalFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * 
+ * 
+ * @author Kushal
+ *
+ */
 public class Utility {
 
 	public static double findTriangleArea(double x1, double y1, double x2, double y2, double x3, double y3) {
@@ -14,4 +21,15 @@ public class Utility {
 		LocalDateTime now = LocalDateTime.now();
 		return dtf.format(now);
 	}
+	
+	/**
+	 * Round off upto 2 points
+	 * 
+	 * @param value
+	 * @return
+	 */
+	 public static double round(double value) {
+    	 DecimalFormat decfor = new DecimalFormat("0.00");
+    	 return Double.parseDouble(decfor.format(value));
+    }
 }

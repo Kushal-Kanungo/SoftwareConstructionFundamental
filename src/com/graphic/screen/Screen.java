@@ -1,15 +1,15 @@
 package com.graphic.screen;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 import com.graphic.shape.Shape;
-import com.graphic.shape.Utility;
 
 /**
- * class : Screen
- * desc : This class represent a screen which have its dimensions.
+ * class : Screen desc : This class represent a screen which have its
+ * dimensions.
  * 
  * @author Kushal
  * @since 28 OCT 2022 1:00 AM
@@ -22,10 +22,9 @@ public class Screen {
 	private double YMAX;
 	private double XORIGIN;
 	private double YORIGIN;
-	private HashMap<Integer, Object[]> allShapes;
+//	private HashMap<Integer, Object[]> allShapes;
 
-	
-	
+	private List<Object[]> allshapes;
 
 	/**
 	 * Constructor for the screen to initialize the screen dimensions
@@ -36,7 +35,8 @@ public class Screen {
 	public Screen(double XMAX, double YMAX) {
 		this.XMAX = XMAX;
 		this.YMAX = YMAX;
-		this.allShapes = new HashMap<Integer, Object[]>();
+//		this.allShapes = new HashMap<Integer, Object[]>();
+		this.allshapes = new ArrayList<Object[]>();
 	}
 
 	/**
@@ -46,13 +46,15 @@ public class Screen {
 	 * @return
 	 */
 	public int addShape(Shape newShape) {
+
 		double[] extreme = newShape.getExtremePointes();
 		double[] origin = newShape.getOrigin();
 		if (extreme[0] >= XMAX || extreme[1] >= YMAX || origin[0] < XORIGIN || origin[1] < YORIGIN)
 			throw new IllegalArgumentException("A part of this shape or whole shape is outside the screen");
 
-		Object[] shapeData = new Object[] { newShape, Utility.getTimeStamp() };
-		this.allShapes.put(ID, shapeData);
+		Object[] shapeData = new Object[] { ID, newShape, System.currentTimeMillis() };
+//		this.allShapes.put(ID, shapeData);
+		allshapes.add(shapeData);
 		return ID++;
 	}
 
@@ -63,10 +65,14 @@ public class Screen {
 	 * @return
 	 */
 	public boolean removeShape(int shapeID) {
-		if (allShapes.get(shapeID) == null)
-			return false;
-		allShapes.remove(shapeID);
-		return true;
+		for (int idx = 0; idx < allshapes.size(); idx++) {
+			Object[] data = allshapes.get(idx);
+			if ((int) data[0] == shapeID) {
+				allshapes.remove(shapeID);
+				return true;
+			}
+		}
+		return false;
 	}
 
 	/**
@@ -75,10 +81,11 @@ public class Screen {
 	 * @param point
 	 */
 	public void getShapesEnclosedPoint(double[] point) {
-		allShapes.forEach((id, shapeData) -> {
+		for (Object[] shapeData : allshapes) {
 			if (((Shape) shapeData[0]).isPointEnclosed(point))
-				System.out.println(id + "  " + ((Shape) shapeData[0]).getShapeInfo() + "\t" + (String) shapeData[1]);
-		});
+				System.out.println(
+						shapeData[0] + "  " + ((Shape) shapeData[1]).getShapeInfo() + "\t" +  shapeData[2]+"Area\t"+((Shape)shapeData[1]).getArea());
+		}
 	}
 
 	/**
@@ -86,9 +93,50 @@ public class Screen {
 	 * 
 	 */
 	public void listAllShapes() {
-		allShapes.forEach((id, shapeData) -> {
-			System.out.println(id + "  " + ((Shape) shapeData[0]).getShapeInfo() + "\t" + (String) shapeData[1]);
+		for (Object[] shapeData : allshapes) {
+			System.out.println(
+					shapeData[0] + "  " + ((Shape) shapeData[1]).getShapeInfo() + "\t" +  shapeData[2] + "Area\t"+((Shape)shapeData[1]).getArea());
+		}
+	}
+	
+	/**
+	 * It prints all the sapes when arraylist is passed
+	 * 
+	 * @param listAllShapes
+	 */
+	public void listAllShapes(List<Object[]> listAllShapes) {
+		for (Object[] shapeData : listAllShapes) {
+			System.out.println(
+					shapeData[0] + "  " + ((Shape) shapeData[1]).getShapeInfo() + "\t" +  shapeData[2] + "Area\t"+((Shape)shapeData[1]).getArea());
+		}
+	}
+
+	/**
+	 * It sorts the shapes in screen on basis of Area than perimeter, than time Stamp
+	 * 
+	 * @return
+	 */
+	public List<Object[]> sortShapes() {
+		List<Object[]> sortedShapes = this.allshapes;
+		Collections.sort(sortedShapes, new Comparator<Object[]>() {
+
+			@Override
+			public int compare(Object[] o1, Object[] o2) {
+				if (((Shape) o1[1]).getArea() < ((Shape) o2[1]).getArea())
+					return -1;
+				else if (((Shape) o1[1]).getPerimeter() < ((Shape) o2[1]).getPerimeter())
+					return -1;
+				else if ((Long) o1[2] < (Long) o2[2])
+					return -1;
+
+				else
+					return 1;
+
+			}
+
 		});
+		return sortedShapes;
+
 	}
 
 }

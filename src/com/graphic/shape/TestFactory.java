@@ -17,13 +17,13 @@ class TestFactory {
 
 	public static Stream<Arguments> object() {
 		return Stream.of(
-				Arguments.of(ShapeType.CIRCLE, new Point(6,7), new ArrayList<>(Arrays.asList(7)), "Circle" ),
-				Arguments.of(ShapeType.SQUARE, new Point(90,90), new ArrayList<>(Arrays.asList(4)), "Square" ),
-				Arguments.of(ShapeType.RECTANGLE, new Point(70,40), new ArrayList<>(Arrays.asList(4,8)), "Rectangle" ),
-				Arguments.of(ShapeType.TRIANGLE, new Point(34,96), new ArrayList<>(Arrays.asList(9,8)), "Triangle" ),
-				Arguments.of(ShapeType.RECTANGLE, new Point(78,33), new ArrayList<>(Arrays.asList(4,5)), "Rectangle" ),
-				Arguments.of(ShapeType.SQUARE, new Point(32,54), new ArrayList<>(Arrays.asList(10)), "Square" ),
-				Arguments.of(ShapeType.CIRCLE, new Point(35,32), new ArrayList<>(Arrays.asList(45)), "Circle" )
+				Arguments.of(ShapeType.CIRCLE, new Point(6,7), new ArrayList<>(Arrays.asList(7d)), "Circle" ),
+				Arguments.of(ShapeType.SQUARE, new Point(90,90), new ArrayList<>(Arrays.asList(4d)), "Square" ),
+				Arguments.of(ShapeType.RECTANGLE, new Point(70,40), new ArrayList<>(Arrays.asList(4d,8d)), "Rectangle" ),
+				Arguments.of(ShapeType.TRIANGLE, new Point(34,96), new ArrayList<>(Arrays.asList(9d,8d)), "Triangle" ),
+				Arguments.of(ShapeType.RECTANGLE, new Point(78,33), new ArrayList<>(Arrays.asList(4d,5d)), "Rectangle" ),
+				Arguments.of(ShapeType.SQUARE, new Point(32,54), new ArrayList<>(Arrays.asList(10d)), "Square" ),
+				Arguments.of(ShapeType.CIRCLE, new Point(35,32), new ArrayList<>(Arrays.asList(45d)), "Circle" )
 				);
 	}
 	

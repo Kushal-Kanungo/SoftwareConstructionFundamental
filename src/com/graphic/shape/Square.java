@@ -54,7 +54,7 @@ public class Square implements Shape {
 	 */
 	@Override
 	public double getArea() {
-		return side * side;
+		return Utility.round(side * side);
 	}
 
 	/**
@@ -64,7 +64,7 @@ public class Square implements Shape {
 	 */
 	@Override
 	public double getPerimeter() {
-		return FOUR * side;
+		return Utility.round(FOUR * side);
 	}
 
 	/**

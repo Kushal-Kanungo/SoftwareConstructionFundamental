@@ -34,6 +34,8 @@ public class ShapeFactory {
             	return new Rectangle(shapeArguments, pointer);
             case TRIANGLE:
             	return new Triangle(shapeArguments, pointer);
+            case POLYGON:
+            	return new Polygon(shapeArguments, pointer);
         
             default:
                 break;

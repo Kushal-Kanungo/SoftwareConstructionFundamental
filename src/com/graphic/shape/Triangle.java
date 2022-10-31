@@ -59,7 +59,7 @@ public class Triangle implements Shape {
 	@Override
 	public double getArea() {
 		DecimalFormat decfor = new DecimalFormat("0.00");
-		return Double.parseDouble(decfor.format(HALF * base * height));
+		return Utility.round(HALF* base * height);
 	}
 
 	/**
@@ -72,7 +72,7 @@ public class Triangle implements Shape {
 		double sides = Math.sqrt((base * HALF) * (base * HALF) + height * height);
 
 		
-		return Shape.round(TWO * sides + base);
+		return Utility.round(TWO * sides + base);
 	}
 
 	/**

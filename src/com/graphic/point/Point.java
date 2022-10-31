@@ -18,6 +18,10 @@ public class Point {
      * @param yPoint
      */
     public Point(double xPoint, double yPoint) {
+    	
+    	if(xPoint < 0 || yPoint < 0)
+    		throw new IllegalArgumentException("Pointer cannot be negative");
+    	
     	   this.xPoint  = xPoint;
            this.yPoint = yPoint;
        }
@@ -29,6 +33,8 @@ public class Point {
      * @param yPoint
      */
     public void setPoint(double xPoint, double yPoint){
+    	if(xPoint < 0 || yPoint < 0)
+    		throw new IllegalArgumentException("Pointer cannot be negative");
         this.xPoint  = xPoint;
         this.yPoint = yPoint;
     }
