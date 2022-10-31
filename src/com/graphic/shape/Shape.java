@@ -1,5 +1,7 @@
 package com.graphic.shape;
 
+import java.text.DecimalFormat;
+
 /**
  * interface :Shape
  * 
@@ -16,6 +18,10 @@ public interface Shape {
     public String getShapeName();
     public boolean isPointEnclosed(double[] point); 
 
+    public static double round(double value) {
+    	 DecimalFormat decfor = new DecimalFormat("0.00");
+    	 return Double.parseDouble(decfor.format(value));
+    }
    
 
     /**

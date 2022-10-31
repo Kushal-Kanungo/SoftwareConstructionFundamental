@@ -1,5 +1,7 @@
 package com.graphic.shape;
 
+import java.util.ArrayList;
+
 import com.graphic.point.Point;
 
 /**
@@ -21,17 +23,17 @@ public class ShapeFactory {
 	 * @param shapeArguments
 	 * @return
 	 */
-    public static Shape createShape(Shape.ShapeType shapeType,Point pointer ,double ... shapeArguments){
+    public static Shape createShape(Shape.ShapeType shapeType,Point pointer ,ArrayList<Double> shapeArguments){
 
         switch (shapeType) {
             case SQUARE:
-                return new Square(shapeArguments[0], pointer);
+                return new Square(shapeArguments, pointer);
             case CIRCLE:
-            	return new Circle(shapeArguments[0], pointer);
+            	return new Circle(shapeArguments, pointer);
             case RECTANGLE:
-            	return new Rectangle(shapeArguments[0], shapeArguments[1], pointer);
+            	return new Rectangle(shapeArguments, pointer);
             case TRIANGLE:
-            	return new Triangle(shapeArguments[0], shapeArguments[1], pointer);
+            	return new Triangle(shapeArguments, pointer);
         
             default:
                 break;

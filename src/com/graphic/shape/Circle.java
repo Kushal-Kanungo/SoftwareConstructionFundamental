@@ -1,5 +1,7 @@
 package com.graphic.shape;
 
+import java.util.ArrayList;
+
 import com.graphic.point.Point;
 
 /**
@@ -25,8 +27,14 @@ public class Circle implements Shape{
      * @param radius
      * @param pointer
      */
-    public Circle(double radius, Point pointer) {
-        this.radius = radius;
+    public Circle(ArrayList<Double> shapeArguments, Point pointer) {
+    	if (shapeArguments.size()!=1)
+          throw new IllegalArgumentException("Enter Valid Number of Arguments");
+    	for (Double element : shapeArguments) {
+			if(element<=0)
+				throw new IllegalArgumentException("Arguments cannot be empty");
+		}
+        this.radius = shapeArguments.get(0);
         this.origin = pointer.getPoint();
         end[0] = origin[0]+radius;
         end[1] = origin[1]+radius;
